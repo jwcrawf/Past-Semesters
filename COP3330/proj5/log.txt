@@ -1,0 +1,75 @@
+log.txt # log file for FastLane project
+10/23/2017
+Jon Crawford
+crawford
+
+10/23/2017 5:36PM: Getting a late start on this one because I had a physics exam
+today so I was cramming all weekend, just copied the files and brought over the
+files from last project, going to read the assignment doc tonight and test out
+tracker_i.x to see what kind of behavior the project is demanding.
+
+10/24/2017 9:23AM: Today I am reading the doc again and I am starting tracker.cpp
+and declaring the constants, then thinking about how I will do my main loop. The
+printing seems straighforward enough but the cases are gonna take some thinking
+I am still trying to digest the information in the doc. Seems like a significant
+amount of branching and probably a big while or do while loop. It also seems
+that we are not told the exact length of the different strings so there will have
+to a counter for those for the end. I worked at AVIS car rental and different
+people had different length driver license numbers, older or longer time residents 
+were shorter because they've had theirs longer. Also some license plates were
+shorter because they had a symbol before or after the characters so that's
+pretty realistic and neat.
+
+10/26/2017 9:13AM: working on tracker.cpp trying to pattern it off the
+style of the vtester with the big loop and cases. Basically right now I am
+starting my loop so I am typing in all kinds of terrible values to try and make
+tracker_i.x break so I can see what types of error messages I need and
+behavior. if 0 nothing happens, but it has other messages for wrong data types
+that I have found.
+Example:
+crawford@linprog3.cs.fsu.edu:~/cop3330/proj5>tracker_i.x 
+
+FastLane Tracker started...
+
+g
+** Tracker error: unable to read shift size
+
+10/26/2017 2:28PM: been working on this all day, have most everything filled in
+except for the print formatting, i just finished up the make file so I could
+actually make an executable instead of just co3330 and my printing is
+hilariously poor.
+crawford@linprog3.cs.fsu.edu:~/cop3330/proj5>tracker.x < shift1.in
+
+FastLane Tracker started...
+
+ Shift 1 Summary
+ ===============
+
+  Carriages:            0  Buses:                0  Limos:                0
+  Trucks:               0  Vans:                 0  Tankers:              0
+  Flatbeds:             0  Unknowns:             1  Badregs:              0
+  Total Passenger Cap:  0  Total Freight Cap     0
+ Shift 1 Log
+ ===============  
+okay it actually looks way worse than that on the screen and runs all over the
+place so I am going to have to look at how I did the lengths of the strings
+formatting. 
+
+So they all just needed \n after them so thats looking better. 
+Now I have to actually get some values in the log portion.
+And my freight is showing an integer so I am going to format that. 
+
+10/26/2017 5:39PM: Home from class working on my printing, shift1 prints fine
+but my output gets all screwed up during shift2 when there are more values.
+Type  Pass Cap  Load Cap  Registration  Operator ID  Operator CDL  
+  ----  --------  --------  ------------  -----------  ------------  
+   UNK
+         0
+      0.00
+  1vehicle      
+Driver_1_ID  
+Driver_1_CDL  
+   CAR
+        25
+Okay nevermind got that fixed up it was actually pretty minor it just needed a
+\n at the end n the loop. It is now printing the same as the area51 executables.

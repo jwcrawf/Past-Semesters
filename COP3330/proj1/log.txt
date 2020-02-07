@@ -1,0 +1,152 @@
+log.txt # log file for UIntSet project
+9/1/2017 5:36PM
+Jon Crawford
+crawford
+
+9/1/2017 5:37PM: Recon and Initiation of project 1.
+
+9/4/2017 3:30PM: Reviewing Array and string in cop3330 orgranizer.
+
+9/5/2017 10:20AM: Copy of files from LIB into proj1 folder and inspection of
+included files via emacs.
+
+9/6/2017 10:05AM: Creation of cstringsort.h header file for use in proj1, begin
+function outline descriptions from cstringsort.h within cstringsort.cpp.
+
+9/8/2017 10:31AM: Working on refactoring insertion sort function for use with
+cstring arrays.
+
+9/8/2017 2:51PM: After working all day on diff function I am finally able to
+return without errors. Unsure at this point if this will need to be tweaked again
+after further populating the other functions.
+
+9/9/2017 3:31PM: Working on Lex comp loop through, probably going to combine
+main and cstringsort.cpp into one project as is suggested on outline.
+
+9/12/2017 8:53PM: seperated files and remade them as seperate, tested using
+sdiff, difference value for return lexdiff matches lacher's, difference return for
+dictionary diff is off, need to figure out casting of chars for lowercase sorting.
+
+9/13/2017 9:36AM: compiling on linprog and sending 5 strings manually. program
+compiles, copies strings and lists them, does not error, but does not sort. the sorted
+strings section is the same as the regular array. 
+
+9/13/2017 11:33AM: at this point main is working, cstringsort.h is done. the
+strings are being accessed and sent to the diff function which is returning an
+integer value, but the strings are not being sorted alphabetically. 
+
+4 strings as read:
+  tedy
+  jack
+  same
+  bill
+
+4 strings after sort:
+  tedy
+  jack
+  same
+  bill
+
+This must be a problem with my insertion sort not replacing the string order
+  when it gets the return from the comparison.
+
+9/13/2017 8:36PM: i have finally fixed the sorting function. I am able to sort
+now but my diff functions must not have been as complete as I thought need to
+make sure
+
+8 strings as read:
+  aBa
+  aba
+  Billy
+  JAck
+  jack
+  Tedy
+  adam
+  bob
+
+8 strings after sort:
+  aBa
+  aba
+  adam
+  Billy
+  bob
+  JAck
+  jack
+  Tedy
+
+9/13/2017 10:40PM: made a test file with more input strings to test, hopefully
+ones that will show more clearly what is going on
+
+Lex Sort Test:
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj1> ssort.x a < test
+
+11 strings as read:
+  aBa
+  aba
+  Billy
+  JAck
+  jack
+  Tedy
+  adam
+  bob
+  abba
+  ABB
+  abb
+
+11 strings after sort:
+  ABB
+  Billy
+  JAck
+  Tedy
+  aBa
+  aba
+  abb
+  abba
+  adam
+  bob
+  jack
+
+Dictionary Sort Test:
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj1> ssort.x d < test
+
+11 strings as read:
+  aBa
+  aba
+  Billy
+  JAck
+  jack
+  Tedy
+  adam
+  bob
+  abba
+  ABB
+  abb
+
+11 strings after sort:
+  aBa
+  aba
+  ABB
+  abb
+  abba
+  adam
+  Billy
+  bob
+  JAck
+  jack
+  Tedy
+
+ssort_i.x executable gives same results so I think I am all set.
+Going to try to submit and see what test results give.
+
+9/17/2017 5:44PM: Decided to look at the discussion board last minute and saw a
+suggestion by prof. to go over the coding standards. fixing my count++ in main to be
+++count and re-submitting because i don't want to lose points. Also, am a little worried about my
+comments, my teacher for programming 1 at community college made us do a comment
+block above each function, I have this in there and hope it is okay. 
+--
+Basically opened a can of worms by doing this because there were new tests
+implemented between the time of my last submissions that i was confident were
+sorting correctly and now my code differed from the test. Saw in the discussion board
+this will be a points deduction. Thankfully we have extra time due to the storm. Basically my diff functions
+only return positive and negative and I base my sort on that to keep the code
+simple. Going to have to look at it again to make it return 1 or -1 or 0. 

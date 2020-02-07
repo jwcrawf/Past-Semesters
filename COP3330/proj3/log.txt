@@ -1,0 +1,116 @@
+log.txt # log file for Prime project
+9/22/2017
+Jon Crawford
+crawford
+
+9/22/2017 3:41PM: Initialization of project log, copying and inspection of included files. 
+Creation of deliverable files & their headers to outline project. Just getting
+familiar with the project but about to focus on exam.
+
+10/2/2017 9:17PM: Exam week is over so I am back on this project. Have made a
+header prime.h and have copied those definitions into prime.cpp to begin
+constructing the listed functions with.  
+
+10/9/2017 9:51AM: Took a brief hiatus for math exam but today I am working on my
+bitvect implementation. 
+10/9/2017 6:11PM: I am able to compile with the co3330 command without errors
+and create and executable fbitvect.x, no errors are shown and I can mess with
+the menu a little, think I am on to the next step of the project.
+
+crawford@linprog1.cs.fsu.edu:~/cop3330/proj3>fbitvect.x 20
+Welcome to fbitvect
+     BitVector (20) v;
+     operation                                entry
+     ---------                                -----
+     v.Set      ()  ............................  S
+     v.Set      (index)  .......................  s
+     v.Unset    ()  ............................  U
+     v.Unset    (index)  .......................  u
+     v.Flip     ()  ............................  F
+     v.Flip     (index)  .......................  f
+     v.Test     (index)  .......................  t
+     v.Expand   (newsize)  .....................  e
+     v.Dump     (std::cout)  ...................  d
+     std::cout << v  ...........................  o
+     copy, assign tests  .......................  =
+     display this Menu  ........................  m
+     switch to interactive mode  ...............  x
+     Quit program  .............................  q
+  Enter [op][index] ('M' for menu, 'Q' to quit): e 35 
+ v.Expand(35)
+  Enter [op][index] ('M' for menu, 'Q' to quit): q
+Thank you for testing BitVector
+
+Obviously nothing else much to see yet but we move on...
+
+10/10/2017 8:56AM: working on prime.cpp mainly on the sieve function as its the
+main component that we need to figure out. have populated some of the other
+functions in prime (the easy ones) will spend most of today on the others. 
+
+10/10/2017 12:38PM: co3330 prime is not showing any errors but I still dont know
+if what i did works, just that it is syntactically correct. Gonna work on the
+makefile to see how this project will build out.
+
+10/10/2917 2:08PM: makefile is finally done and I have been playing with fprime
+to see how my prime.cpp works, have a couple errors so far just in teh things i
+have tried, first my numbers were printing vertically so i had to fix my os <<
+and now I am looking and my numbers are wrong I have too many primes. I need to
+fix my Sieve because it is not unsetting in the proper increment apparently.
+
+Enter selection ('M' for menu, 'Q' to quit): A
+  p.All(32): 2 3 4 5 6 7 8 10 11 13 14 16 17 19 20 22 23 26 28 29 31 
+ 
+I can reset upperbound, copy assign, etc but I know I have to rework sieve.
+
+10/10/2017 3:16PM: It works!
+Enter selection ('M' for menu, 'Q' to quit): A
+  p.All(32): 2 3 5 7 11 13 17 19 23 29 31 
+I noticed my upper bound says one more than the area51 exe so I am going to look at that
+next.
+Got it i think, it was because of n+1.
+Had to tweak expand a bit too. noticed an error message I needed to include on
+it and Largest when the argument is too large.
+ 
+10/10/2017 6:01PM: Did my first robocheck and I have two errors to work on. One
+with the printout from p.All there needs to be a leading space before all the
+numbers are printed, should be easy enough.
+
+Example:
+Results fprime.x 150 p.com2 (diff only)
+-----------------------------------------
+17c17
+<   p.All(150):  2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79
+83 89 97 101 103 107 109 113 127 131 137 139 149
+---
+>   p.All(150): 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83
+89 97 101 103 107 109 113 127 131 137 139 149 
+
+** The second error is with my
+makefile It appears I am not supposed to include bitvect.h in prime.cpp anymore.
+Error:
+
+Result of build w student makefile 
+----------------------------------
+make: *** No rule to make target `bitvect.h', needed by `prime.o'.  Stop.
+ 
+10/10/2017 9:34PM: Keep trying with this makefile and getting errors on my
+robocheck for target
+
+Example:
+make: *** No rule to make target `bitvect.h', needed by `bitvect.o'.  Stop.
+
+I finally see that there is # in front of bitvect.h in Lacher example.   
+
+bitvect.o: bitvect.cpp # bitvect.h
+        $(CC) -c bitvect.cpp
+
+And mine did not have the pound because logically I was thinking I needed it like
+the prior makefiles.
+
+10/13/2017 9:27AM: Yesterday I went back through the project and cleaned out
+unneccessary comments, I see now that the whole commenting above everything is
+kinda amateurish anyway so I plan on just using it for myself when I'm trying to
+figure something out or only as needed. I used up 4/5 submissions trying to
+figure out why mymakefile had that dumb # symbol so I have only one submission
+left I have been debating on using it but I am kinda scared to use it because
+its the last one! 

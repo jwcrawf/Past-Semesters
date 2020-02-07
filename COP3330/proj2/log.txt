@@ -1,0 +1,108 @@
+log.txt # log file for ClassID project
+9/17/2017
+Jon Crawford
+crawford
+
+9/17/2017 2:47PM: Initial reading of project directions and copy of files. Also
+beginning of header creation with the listed funcs from the assignment.
+
+9/18/2017 6:20PM: working on copying the functions from the id.h into id.cpp and
+doing what i can to populate the obvious parts of the functions.
+
+9/19/2017 10:20AM: Having a hard time with the copy assignment function, lots of
+errors, finally added ID:: seemed to help, got a different error now to work on
+
+9/20/2017 9:10AM: No other classes so working on this all day, got pretty much
+everything filled in except the ostream overloard operator portion, which is
+definitely something I am going to have to review/research. I remember how to do
+most of the function this-> I learned a little about in a prior java class.
+
+9/21/2017 11:15AM: Still stumped on the overload part so I am going to make the
+makefile out and see how I can compile and go back to it. Makefile is done, now
+it just goes to error for operator ostream when i compile so that is last thing
+to figure out, before being able to observe behavior.  
+ 
+9/21/2017 12:24PM: I can compile without errors but when i run nothing prints, not
+sure where my problem is just yet, possibly with the print formatting.  
+
+9/21/2017 1:08PM Looks like i have two problems with my code, the first problem
+is in idtest1 i get all ofthe same values but there is a problem with the names
+on the transitive assignment check, i moved stuff around and now i get no names
+at all, think i have a problem with dynamic memory allocation.Getting a huge
+error on the bottom of the screen after i print out.
+
+9/21/2017 5:40PM Just got home from physics and wanted to try something that
+occurred to me about the chars and null terminating them, i set them equal to
+len +1 and then null terminated them and it no longer erros an prints,below is
+my printout for idtest1 currently, going to test idtest2 next.
+
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj2> make idtest1.x
+g++ -std=c++11 -Wall -Wextra -c -I. id.cpp
+g++ -std=c++11 -Wall -Wextra -o idtest1.x idtest1.o id.o
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj2> idtest1.x
+ IDs after declaration:
+  p1 = Chris Lacher     100
+  p2 = #        -1
+ IDs after Set:
+  p1 = Copy Checker     10
+  p2 = Assign Checker   20
+ IDs after p3 = CopyCheck(p1):
+  p1 = Copy Checker     10
+  p3 = Copy Checker     10
+ IDs after AssignCheck(p2,p3):
+  p2 = Assign Checker   20
+  p3 = Copy Checker     10
+ IDs after p1 = p2 = p3 = p4:
+  p1 = Transitive Assignment Check      50
+  p2 = Transitive Assignment Check      50
+  p3 = Transitive Assignment Check      50
+  p4 = Transitive Assignment Check      50
+ ID Array after declaration:
+  id[ 0] = #    -1
+  id[ 1] = #    -1
+  id[ 2] = #    -1
+  id[ 3] = #    -1
+  id[ 4] = #    -1
+  id[ 5] = #    -1
+  id[ 6] = #    -1
+  id[ 7] = #    -1
+  id[ 8] = #    -1
+  id[ 9] = #    -1
+ ID Array after Set:
+  id[ 0] = A. B. Student        17
+  id[ 1] = A. B. Student        18
+  id[ 2] = A. B. Student        19
+  id[ 3] = A. B. Student        20
+  id[ 4] = A. B. Student        21
+  id[ 5] = A. B. Student        22
+  id[ 6] = A. B. Student        23
+  id[ 7] = A. B. Student        24
+  id[ 8] = A. B. Student        25
+  id[ 9] = A. B. Student        26 
+
+This looks good I believe I'm getting somewhere.
+
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj2> idtest2_i.x
+ IDs after declaration:
+  p1 = Chris Lacher     99
+  p2 = Tony Harris      17
+ IDs after client program changes myName and myAge:
+  p1 = Chris Lacher     99
+  p2 = Tony Harris      17
+crawford@linprog6.cs.fsu.edu:~/cop3330/proj2> idtest2.x
+ IDs after declaration:
+  p1 = Chris Lacher     99
+  p2 = Tony Harris      17
+  p3 = Dalton Bohning   22
+ IDs after client program changes myName and myAge:
+  p1 = Chris Lacher     99
+  p2 = Tony Harris      17
+  p3 = Dalton Bohning   22
+
+Going to try a robocheck to see. 
+
+9/22/2017 9:54AM: Robo check didn't show any differences and i am feeling okay
+because I have learned some of this in my prior class. However the coding
+standards in this class are much more strict so i am going to take the extra
+time i have today before the weekend (my birthday) to go over the coding
+standards and refine my code before doing a final submit.
