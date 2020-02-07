@@ -1,0 +1,45 @@
+<body onload='hideTotal()'>
+  <script src="pack2.js"></script>
+<link rel="stylesheet" href="package.css">
+  <div id="wrap">
+      <form action="" id="boatform" onsubmit="return false;">
+      <div> 
+          <div class="cont_order">
+             <fieldset>
+              <legend>Build your package</legend>
+              <label >Pick your boat</label>
+              <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Jameis" onclick="calculateTotal()" />The Famous Jameis:  Holds up to 8 people (+$600)</label><br/>
+              <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Gillum" onclick="calculateTotal()" />The Gallant Gillum: Holds up to 10 people (+$650)</label><br/>
+              <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Bowden" onclick="calculateTotal()" />Off The Bowden:     Holds up to 14 people (+$900)</label><br/>
+              <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Theory" onclick="calculateTotal()" />C-String Theory:    Holds up to 18 people (+$950)</label><br/>
+              <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Renegade" onclick="calculateTotal()" />The Renegade:     Holds up to 24 people (+$1200)</label><br/>
+               <label class='radiolabel'><input type="radio"  name="selectedBoat" value="Raven" onclick="calculateTotal()" />The Rock Raven:     Holds up to 120 people (+$6000)</label><br/>
+              <br/>
+               
+              <label >Package</label>
+       
+              <select id="package" name='package' onchange="calculateTotal()">
+              <option value="None">Select Package</option>
+              <option value="Half">Half Day Soiree (+$450)</option>
+              <option value="Full">Full Day ($600)</option>
+              <option value="Deep">Deep Sea ++ ($650)</option>
+              <option value="Dinner">Fish and Dinner ($550)</option>
+              <option value="Night">Night Excursion ($450)</option>
+              <option value="Spear">Fear the Spearfishing ($600)</option>
+              
+             </select>
+              <br/>
+              <p>
+              <label for='includebait' class="inlinelabel">Include Bait ($40)</label>
+             <input type="checkbox" id="includebait" name='includebait' onclick="calculateTotal()" />
+             </p>
+               
+              <div id="totalPrice"></div>
+              
+              </fieldset>
+          </div>
+             
+     </form>
+</div><!--End of wrap-->
+
+</body>
