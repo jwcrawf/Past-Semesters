@@ -1,0 +1,42 @@
+# makefile.ws2
+
+# Jon Crawford
+
+# 3/2/2018
+
+# makefile for wordsmith2 proj4
+
+LIB = /home/courses/cop4530p/LIB
+CC = g++ -std=c++11 -Wall -Wextra -I. -I$(LIB)/cpp -I$(LIB)/tcpp
+
+all: ws2.x foaa.x foaa+.x moaa.x
+
+ws2.x: main_ws2.o wordsmith2.o xstring.o
+	$(CC) -o ws2.x main_ws2.o wordsmith2.o xstring.o
+
+foaa.x: foaa.o
+	$(CC) -o foaa.x foaa.o
+
+foaa+.x: foaa+.o
+	$(CC) -o foaa+.x foaa+.o
+
+moaa.x: moaa.o
+	$(CC) -o moaa.x moaa.o
+
+foaa.o: foaa.cpp oaa_bst.h
+	$(CC) -c foaa.cpp
+
+foaa+.o: foaa+.cpp oaa_bst.h
+	$(CC) -c foaa+.cpp
+
+moaa.o: moaa.cpp oaa_bst.h
+	$(CC) -c moaa.cpp
+
+wordsmith2.o: wordsmith2.h wordsmith2.cpp cleanup.cpp
+	$(CC) -c wordsmith2.cpp
+
+main_ws2.o: wordsmith2.h main_ws2.cpp
+	$(CC) -c main_ws2.cpp
+
+xstring.o: $(LIB)/cpp/xstring.h $(LIB)/cpp/xstring.cpp
+	$(CC) -c $(LIB)/cpp/xstring.cpp

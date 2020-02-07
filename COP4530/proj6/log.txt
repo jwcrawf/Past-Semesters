@@ -1,0 +1,171 @@
+log.txt
+
+Jon Crawford
+
+3/19/2018
+
+Log for proj6 HashTable
+
+3/19/2018 4:47PM: Copied over the files and peeked at them after reading some of
+the slides over the weekend. Going to read some more lecture and start a recon
+of the project tonight so I started the log to keep track of my work.
+
+3/22/2018 3:32PM: Converted the start file to a header file and began writing
+pseudocode based on the comments inside each function that implements the strategy.
+
+3/26/2018 9:17AM: Working on the first portion of the codes today. Plan to get
+something down and then start studying for the exam next couple days.
+Found the following in the Lectures and derived an implementation from it.
+
+DataType& Get (const KeyType& k)
+  {
+    Entry e(k,DataType());
+    Set::Iterator i = table_.Includes(e);
+    if (i == table_.End()) // search failed
+    {
+      table_.Insert(k,d);
+      i = table_.Includes(e);
+    }
+    return *i.data_;   
+
+Using this structure and the Helper function Index I can derive the other
+implementations now that I have figured out the base plan.
+
+3/28/2018 5:21PM: Home from the exam ( DO NOT want to talk about it) working on
+my implementations. I have chased some errors in my first few big functions and 
+after some c4530 they all the sudden compiled so I am checking them and they work! 
+No iterators so I can't do any traversals or dumps yet. But I can insert,get etc.
+
+3/28/2018 7:01PM: Looking at project 5 for some helpful hints on deriving these
+iterators. Was able to figure out some of them based on that but the ++ and --
+looks fairly involved. I did notice some clues in the Valid function
+implementation that was given with the start file. 
+
+3/30/2018 8:31AM: I have the entire day to work on these iterators and I have
+made myself well studied of what they need to do. I plan on getting to work
+implementing Begin and End which I think I can do and then my plan is to employ
+the opposite logic for rBegin and rEnd. 
+
+11:31AM: I can traverse with ++ finall buy I am getting an error for a
+dereference of the List iterator on the -- and I opened up List from the LIB
+to find the error and it appears to be because I am trying to grab at 0 but the
+bucketNum of 0 is a valid bucket that I need to get to so I am really confused
+about that. The operator -- has not been as straightforward as I thought, it's
+proving to be difficult I cannot seem to get out without an error even though
+the logic I've employed is sound.
+
+8:43PM: Working on this all day I think I am understanding something. When I
+break out I am breaking out at the 0 bucket but then I am trying to call the
+list with that same 0 and that is the dereference. I think I have got what I
+need to do now but it is late and I am going to pick this up tomorrow at 8AM.  
+
+3/31/2018 10:04AM:Finally it breaks out correctly on the reverse for the simple
+typing in of entries I have been testing with a couple values. Need to make my
+tables now and see where it goes.
+
+3/31/2018 11:31AM: Time for some testing with higher numbers to see where I stand.
+The following was done with 100 buckets and a file of 1k entries. The insert
+worked as there came out to be 865 because of re-entries. This means data
+handling is correct.
+
+b[94]:  kgq:3   hmh:3   ja:2    mkv:3   pgn:3   ey:2    fxm:3   anw:3   am:2
+lmq:3   gru:3   txd:3   jx:2
+b[95]:  ov:2    oh:2    zc:2    wy:2    ses:3   fdg:3   mj:2    tca:3   gg:2
+czp:3   esj:3
+b[96]:  kvi:3   hn:2    rba:3   sxb:3   hx:2    bkv:3
+HashTable < fsu::String , int , hashclass::KISS <> >
+Enter [command][arguments] ('M' for menu, 'Q' to quit): s
+  table size:      865
+HashTable < fsu::String , int , hashclass::KISS <> >
+Enter [command][arguments] ('M' for menu, 'Q' to quit):
+
+More tests to try with traversing.
+-------------------------------------------------------------------------
+Found an error with 100 entries my reverse does not make it all the way it
+stops at 92 when I traverse, the ++ makes it the whole way so I am looking at
+rEnd and -- for the error, Not gonna lie this -- operator has been a house of
+pain for me this project so I am none too excited about this bug:
+
+qsdla      88
+vggeu      89
+uxoqv      90
+jpac       91
+ljph       92
+
+HashTable < fsu::String , int , hashclass::KISS <> >
+Enter [command][arguments] ('M' for menu, 'Q' to quit): 
+----------------------------------------------------------
+Need to make sure I get all the way into that last bucket before I break out.
+
+Now I am definitely overshooting:
+lgqgex      4
+fqkuzb      3
+iodx        2
+gfwtus      1
+** Vector operator[] error: index beyond memory allocation
+   Returning last available location at index 6
+
+The only good news to report is that the data is all correct so this is just an
+out of bounds error at this point. -- and rEnd still are not agreeing with each
+other.
+
+msyi       89
+akecii     88
+mheph      87
+oork       86
+jqvyw      85
+mjckb     100
+ekasjz     99
+omnu       98
+wjcz       97
+koyel      96
+
+4:59PM: Wow that took forever, I mean I was chasing this bug and I had set up my
+-- operator to use a lot of the opposite of the Valids that I used for the ++
+and this made sense to me except it doesnt not work for End and rEnd inside of
+there, My brain wasn't seeing the small difference in the letter inside the
+Valid function for the longest time.But then at the same time it needed the same
+as the valid function for the >= so it was really hard for my mind to see that.
+That it could be same and opposite at the same time I kept thinking it had to be
+one or the other. Also the fact that I had switched over from a while loop to a
+do-while to make sure i entered the last bucket and it kept searching so i knew
+i had gotten there and then the problem was breaking out. But now with do-while
+and the rEnd and equality from  Valid it does the intended behavior. This was
+really pretty hard because I knew what I wanted to do logically but there were
+so many factors in the way before I could get to it.
+
+hkxye      93
+pjgnp      94
+xaoy       95
+xghh       96
+lgqgex     97
+fqkuzb     98
+iodx       99
+gfwtus    100
+
+HashTable < fsu::String , int , hashclass::KISS <> >
+Enter [command][arguments] ('M' for menu, 'Q' to quit): 
+
+Interstingly enough with my table of 100 values there were no re-entries but
+with my table of 1000 there were 135..That's fascinating in and of itself.
+But unrelated to the project, Anyways:
+
+bfw    862
+wzh    863
+tc     864
+dbw    865
+
+HashTable < fsu::String , int , hashclass::KISS <> >
+Enter [command][arguments] ('M' for menu, 'Q' to quit): 
+
+Going to do some diff tests with 100k and see how I come out.
+
+b[996]: elihs:5 qjj:3   vsqsb:5 jln:3   yvmt:4  lag:3   ujx:3
+   
+b[996]: elihs:5 qjj:3   vsqsb:5 jln:3   yvmt:4  lag:3   ujx:3
+
+Those look good, I also realized the anomaly with the re-entries was down to how
+I have restricted the length of the keys, the shorter the key to more likely for
+the randomizer to remake it, those were length 2-3 in the 1k table but the other
+were length up to 5. Oh well these outputs are matching for large tables so I am
+pleased with that.

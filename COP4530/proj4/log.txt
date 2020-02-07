@@ -1,0 +1,146 @@
+log.txt
+
+Jon Crawford
+
+2/27/2018
+
+Log for project 4
+
+2/27/2018 2:13PM: Had my last midterm yesterday so i am just getting a look at
+this material today but I have already done some reading the past week. Have
+copied over all the files and plan for my preliminary recon of the project this
+afternoon. Realize this is a marginally late start but I have the entire week to
+code and midterms were unavoidable.
+
+2/28/2018 7:39PM: Stopping for the day, Refactored wordsmith2.h and
+wordsmith2.cpp today and set up the skeletons for the functions I will be doing
+in OAA. Tomorrow and friday will be 9-5 OAA days for me so I think I am still in
+okay shape especially if I do some more reading on the lectures tonight. I have
+already read them multiple times but I've noticed more things of note each
+time. Especially after my MAD3105 homework for trees, it is pretty neat how the 
+two classes are lined up on perfectly the same material this week.
+
+3/2/2018 11:46AM: So I have been working on this project since about 8am and I
+have something in everything that needs to be coded I'm just chasing down errors
+to compile with c4530. Had to make minor alterations in the slides and I found
+in the book on page 167 how to do the recursive Order methods for traversal.
+
+3/2/2018 2:03PM: I was able to compile and run my own versions of foaa and test
+out my trees and I have to say the stuff with the colors is so cool! sometimes
+you just gotta give the man his due and that was just really neat. I am able to
+get similar output on almost all the tests so I am going to continue testing and
+see what else I can find but for now I am going to test my wordsmith again and
+see how that goes.
+--
+Okay there were some things I needed to fix that almost got by me in wordsmith
+namely the new difference in the vocabulary size output variable so I had to do
+somthing with that and for the longest time I was forgetting to put the include
+statements I had used for the original wordsmith but all is okay now and I just
+tested wordsmith with some files and did an sdiff and it all works as intended.  
+ 
+3/2/2018 4:37PM: Finished the makefile and have every file completed now I am
+just chasing a bug with moaa. my foaa, foaa+, and wordsmith all work correctly
+but I am unable to even start an moaa test it errors right after the first
+message is displayed. 
+I can see from looking at the code that it checks for size
+and height but my size and height both worked correctly on foaa so I am going to
+keep looking around for what's going on. The test isn't exactly erroring just
+nothing is happening.
+
+3/2/2018 5:01PM: I am getting a makefile error with with foaa but my code is as
+described in the discussion board post and it works on linprog so I am thinking
+about what that could mean.
+
+crawford@linprog4.cs.fsu.edu:~/cop4530/proj4>make -f makefile.ws2 all
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o ws2.x wordsmith2.cpp
+/home/courses/cop4530p/LIB/cpp/xstring.h
+/home/courses/cop4530p/LIB/cpp/xstring.cpp main_ws2.cpp 
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa.x foaa.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa+.x foaa+.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o moaa.x moaa.cpp
+crawford@linprog4.cs.fsu.edu:~/cop4530/proj4>
+
+Also, still having trouble with moaa not making a test so I am looking into
+that.
+ 
+3/2/2018 7:08PM: After an exhaustive search I found the error and I am able to
+test moaa and it works as it should, in the end it was a simple thing in my
+preorder i had copied down the text from inorder and not changed the call to
+match the function it was in. But when you stress yourself out over something it
+becomes harder to see what is right in front of you.
+
+Testing OAA < String , int > at trial 5 x 10000:
+  x2.Size()              ==  3849
+  x2.Height()            ==  26
+  optimal ht (size)      ==  11
+
+Test Complete
+
+3/3/2018 8:53AM: I am still getting this makefile error on the robograder but I
+pass everything else so I am going to remove all the library from my project
+folder amd try to set my makefile up to compile as if there is nothing copied
+over from the lib and maybe that will simulate how the robograder compilation is
+performed, my fall back is to go old school and just compile everything
+seperately the long way and then combine it. 
+
+9:21AM: revisited some cop3330 material to make sure I am not taking liberties
+with this makefile understanding and I actually found an interesting
+anomaly. Since our makefile is not named makefile it is not holding a tab as
+well it is converting it to spaces. I know that this is the case because when i
+hit tab and it is named makefile the cursor moves with a pink color behind it
+and it does not when it is named something other than makefile. the name
+makefile holds properties in emacs and handles this. I was able to rename my
+makefile as makefile, indent the tab correctly and then rename it back to
+makefile.ws2 to solve this issue.
+
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj4>make -f makefile.ws2 all
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c main_ws2.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c wordsmith2.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c /home/courses/cop4530p/LIB/cpp/xstring.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o ws2.x main_ws2.o wordsmith2.o xstring.o
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa.x foaa.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa+.x foaa+.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o moaa.x moaa.cpp
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj4>
+
+9:29AM: It still errored on the robograde so I guess I am going to go the long
+way and compile all the code. I tried the way from the discussion board but it
+failed right at foaa on the robograder. It said no rule to make target foaa.cpp
+so naturally now I will compile foaa.o and the others. Worried about I am running 
+out of submissions. I've made the makefile 3 different ways that all worked but
+none pass the test and I verified by compiling each executable seperately and 
+with all. At this point I am just going to compile them all and submit.
+ 
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj4>make -f makefile.ws2 all
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c main_ws2.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c wordsmith2.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c /home/courses/cop4530p/LIB/cpp/xstring.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o ws2.x main_ws2.o wordsmith2.o xstring.o
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c foaa.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa.x foaa.o
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c foaa+.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o foaa+.x foaa+.o
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -c moaa.cpp
+g++ -std=c++11 -Wall -Wextra -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -o moaa.x moaa.o
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj4>

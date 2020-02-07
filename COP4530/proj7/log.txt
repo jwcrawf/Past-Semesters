@@ -1,0 +1,159 @@
+log.txt
+
+Jon Crawford
+
+4/7/2018
+
+log file for proj7 Graph Search
+
+4/7/2018 10:20AM: Earlier in the week I read all the lectures and actually began
+inspecting the files for the assignment, today I have types up all the given
+material from the assignment doc and read more into the assigment. Now I need to
+add the variables into the headers and do some function skeletons.
+
+4/8/2018 9:43AM: Today I will do graph.h and make the skeletons for the
+implementations that are not provided and fill in the ones that are.  
+
+Exercises 1-6
+--------------
+4/9/2018 1:23PM: graph.h complete and I made the graph1.10.10 to test on
+it. Compared this to area51 exe and I am satisfied with the output. Making some
+more graphs to work on including a few masterpieces, graph.h looking good so far. 
+
+Ahem, If I may..:
+
+0 --- 1 -- 2 ---- 6 ------------13        16
+|                 |             |          |
+|                 |             |          |
+3 --- 4 --- 5     8 -------9    |          |
+|                          |    |          |
+|                          |    |          |
+10                12 ---- 11    14--------15
+
+Just having a little fun with this, why not. 
+Made a 1000 vertex graph as well to play with. 
+1-6 down, time to move on to the others.
+
+Exercises 7-10
+--------------
+4/10/2018 9:03AM: Working on bfsurvey along with the graph lectures. Following
+some C4530 errors for things like reorders of variables. The assignment doc is
+very specific about how to type the class definition but it does not specify any
+restriction on the variable definitions. Some of them are public in the graph
+lecture so I made them public underneath the private variables in my definition
+and then grouped them this way in my constructor to get around the compiler
+warnings for reorder.
+
+4/10/2018 4:14PM: Loving how thorough this assignment doc is, the brain cells
+quote earlier was really cool can't wait to blow my dad's mind with that haha. 
+
+4/11/2018 10:24AM: Made the makefile, thankful that the copy script explanation
+was included because that might have stumped me for a bit. It is ever so simple
+though when you think about it. I have been dual booting my laptop with linux
+mint and using the terminal to log in directly sometimes and I made a script
+that I can just type shell or linprog and it logs me in and inputs my password.
+I made some cool aliases for things and really like the setup I feel more at
+home in the environment now.
+
+This has me really interested in the script included in the assignment seeing
+the type of stuff that can be done there is neat. I feel like one of the most
+valuable things I have learned from this program is ditching the IDE dependency.
+
+4/11/2018 2:31PM: Ran some graphs through and I am satisfied with the output for
+bfsurvey so I am going move on to the next one while I am at it. But this wraps
+the exercises 7-10.
+
+Exercises 11-18
+---------------
+4/11/2018 5:56PM: Did some more reading for the dfsurvey portion and plan on
+doing the bulk of it tomorrow but I created the file name and wrote the header
+doc so that its ready to go.  
+
+11-12:
+Looking at the two algorithms in the notes we can go by line by line to compare
+them and verify their functional similarity. Also, since the difference between
+BFsearch and DFsearch is only one line in this case, we will choose one:
+
+BFSearch(v)
+{
+  conQ_.Push(v);          // font or back - conQ_ is empty
+  color_[v] = grey;
+  parent_[v] = null_;
+  while (!conQ.Empty())
+  {
+    Vertex x = conQ.Front();
+    if (n = unvisited adjacent from x)
+    {
+      conQ.PushBack(n);  // Push at back end
+      color_[n] = grey;
+      parent_[n] = x;
+    }
+    else
+    {
+      conQ.PopFront();   // Pop at opposite end  - Queue behavior
+      color_[x] = black;
+    }
+  }
+}
+The implementations are identical save for the addition of the iterators and
+time/distance. One thing to note is the algorithm above needs to declare a null
+parent before entering the loop while this automatically handled by the
+iteration declaration. Then the loop above travels blindly through the unvisited
+vertices while the refined version uses a for loop knowing it's bounds. When
+either version reaches an unvisited adjacent vertex it is pushed to the back and
+turned gray, otherwise it is turned black after popping it off the front.
+ For DFSearch the implementation is simply reversed to push to the front in the
+basic version when a neighbor is found to be unvisited while the refined version
+in blue requires more understanding of how to maintain the iterator. Gone is the
+for loop from the refined BFSearch version as this version is limiting the depth
+while performing a depth first search and only visiting the unvisited. When it
+gets stuck and all the surround nodes are visited it pops off the back and moves
+back up looking for an unvisited node to search.          
+The two are functionally identical but the iteration maintains directional and
+visited awareness resulting in a more refined solution. 
+
+13. The runtime of DFSurvey::Search(v), as implemented with an array of
+AdjIterators, is O(|V| + |E|). Consider a graph G with vertices V and Edges E.
+By traversing through G and using a system of color changing to mark a vertex as
+visited upon arrival using the adjacent iterators, therefore cost of runtime
+for this search algorithm is O(1) for each vertex and Edge within G by visiting
+it only once and then executing the inner loop only once,for O(|V| + |E|).
+ The runtime of DFSurvey::Search(), as implemented with an array of
+AdjIterators, is Θ(|V| + |E|). The Search algorithm calls Reset() setting all
+vertices as unvisited within G and then performing Search(v) ensuring each 
+node is searched and resulting in a runtime of Θ(|V| + |E|).
+
+14. DFSurvey::Search(v) would be Ω(|V|2 + |E|) without the use of the helper
+array of adj iterators. The reason for this is that a loop to all vertices would
+cost Ω(|V|2 and then once there you still have to process the edges so + |E|).
+
+
+4/12/2018 3:28PM: This script is the coolest.
+
+crawford@linprog2.cs.fsu.edu:~/cop4530/proj7>check_survey.sh g1000
+Erasing old test data ...
+rm: cannot remove ‘g1000.?fs_?g.local’: No such file or directory
+rm: cannot remove ‘g1000.?fs_?g.area51’: No such file or directory
+Building local tests ...
+make: `fbfs_dg.x' is up to date.
+make: `fbfs_ug.x' is up to date.
+make: `fdfs_dg.x' is up to date.
+make: `fdfs_ug.x' is up to date.
+Running local tests ...
+Copying area51 tests ...
+Running area51 tests ...
+diff g1000.bfs_dg.area51 g1000.bfs_dg.local:
+diff g1000.bfs_ug.area51 g1000.bfs_ug.local:
+diff g1000.dfs_dg.area51 g1000.dfs_dg.local:
+diff g1000.dfs_ug.area51 g1000.dfs_ug.local:
+Complete test results in g1000.?fs_?g.local
+
+4/13/2018 3:19PM: Saw on the discussion board that other students had problem
+with the reorder as well, feeling better about making that adjustment now. 
+Going over the entire assigment today before to make sure I didn't miss
+anything. If I get to it I might do a first submit tonight but I am able to use
+the script with no diffs right now so I am feeling like I need to go over some
+of the questions and make them better.
+
+4/15/2018 2:33PM: About to do a first submittal, I have mulled over this project
+for a considerable amount of time and need to get this in.

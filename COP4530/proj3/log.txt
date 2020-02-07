@@ -1,0 +1,230 @@
+log.txt	
+
+Jon Crawford
+
+2/12/2018
+
+log for proj3 Wordsmith
+
+2/12/2018 9:09AM: Copied over files from the proj folder and reading assignment
+doc. This looks like a really challenging endeavor here so we'll see how this goes.
+Probably our first exposure to a software engineering type challenge where the
+solution is open ended rather than structured and given to us. Cleaning up is a
+project within a project and I am not seeing how to do that without a big loop
+and a ton of cases so I'm wondering in the back of my mind if this is going to
+be one of those deals where somebody does it in 5 lines of code and I have 500!
+
+2/15/2018 9:45AM: Yesterday I read the lectures again to try to digest more
+information, it seems I have to read the things multiple times and then digest
+them over a period of days in order to figure them out, then I will be hiking
+around or something and the pieces come together. Today I am going to make the
+header file and digest some more. 
+
+Made the header file but not sure everything that all needs to be #included yet.
+Also, included string definitions from the message board and updated files.
+
+2/15/2018 11:13AM: So I think there is probably multiple ways to do this but the
+best way would probably be to use the Element function in the library,that way 
+I can iterate over each character like a mini array and also I can use Wrap to 
+make a new string once I have it cleaned up, I'll have to while loop the
+file and then also iterate each string so I am not sure if my solution has bad
+optimization but I know at least that it is not impossible now.
+
+Also if you look at cleanup.rulz it is a really big hint as to how to partition
+the cleanup, you have a leading chars loop that you need to pass before you get to
+acceptance, then you have a second loop to decide what chars to keep.  
+  
+2/16/2018 8:24AM: Spent some time yesterday making my first loop to skip the
+leading characters by their ascii number values found here:
+https://ascii.cl/
+That looks something like this:
+size_t index = 0;
+while ( index < input.Length() && (input.Element(index) != '\0' ||
+        !(input.Element(index) < 91 && input.Element(index) > 64)
+        || !(input.Element(index) < 58 && input.Element(index) > 47)
+        || input.Element(index) != '\\'
+        || (input.Element(index) == '-' && !(input.Element(index +1 ) < 58 &&
+	    input.Element(index + 1) > 47))
+        || ((input.Element(index) == ':' && input.Element(index + 1) == ':')
+	&& (!(input.Element(index +2 ) < 91 && input.Element(index+ 2) > 64)
+	||(!(input.Element(index + 2) < 58 && input.Element(index +2) >47))))))
+{
+  ++index;
+}
+This morning I am looking at doing the second part and need to find the header
+that includes tolower and I find that the same header would have done most of
+that for me! Agh! Sometimes things are like that I guess. I don't have all the
+headers memorized and I didn't even think about it I just went about solving the
+problem. The <cctype> header will clean up that code quite a bit though.
+http://www.cplusplus.com/reference/cctype/
+Definitely a learning experience to scout out the entire problem before coding.
+
+9:12AM: Hah! I just looked at the message board and lacher is doing same as mine
+but with way less code by declaring input.Element first instead of writing it
+each time. I still think mine would have worked it's just less elegant.
+Also saw the suggestion to work on wordsmith first and worry about cleanup
+later so I plan on doing that now.
+
+3:35PM: Been a long day but I am making some progress on wordsmith, I did the
+easier function like clear and I made a count function so I wouldn't have to
+type a loop everytime. It has taken me the better part of day to figure out the
+readtext function, I am assuming it will be just as intensive or more to do the
+write function so I might try to do the summary function and save the write
+function for last and pick it up tomorrow. If I can get everything but write
+done I feel like I am in a pretty good place as far as progress. 
+
+5:05PM: I coded up summary, took some doing to figure out the commas. Also, I
+just put return true in the write function so I could co4530 and I have been
+chasing down syntax and logic errors for the past hour or so with what I have
+already done. Once you start chasing bugs it's like falling down a well so I
+have been at it for longer than I had planned today.
+
+9:03PM: Wow i know I said I was gonna stop but when there in only one function
+left you just want to get to something to compile and see what happens, then I
+found a bunch of errors not defining strings correctly that I needed to work on
+but I was able to compile now for the past hour I have been having my terminal
+tabbed with the area51 version and chasing down little differences in the output
+formatting counting the spaces to move the words and line spaces before and
+after outputs. 
+
+10:24PM: Then I found that when i do multiple files my count is off
+because I am calling my count function when I read and it is telling the total
+of all counts and the readtext count is for just how many got read that one
+time. Then I had to fix my commas when i do a batch file setup because I really
+had a hard time with the comma being in front but i fixed that by incrementing
+right in my if statement which i thought was really cool.I have put over 14 hours
+on this project today but I can now say that I am able to run files through it
+and sort them without any errors. 
+The makefile was also a little bit of a
+challenge to get the include statements and the correct files included in the
+recipe line of the makefile took a little bit for me to figure out. It actually
+got better the more I took away from it, now it looks pretty basic but it works. 
+Tomorrow I will see what the submission testsfind and probably have to do some 
+tweaking to see where there is something I am not seeing.
+
+2/17/2018 9:31AM: I am getting a difference on my submission that I can't
+recreate when I test from the terminal. 
+crawford@shell.cs.fsu.edu:~/cop4530/proj3>sdiff craw?out lacherout
+Text Analysis for files: small.txt shows identical when I run the file but there
+is a difference showing up on the test:
+
+1,5d0
+< Welcome to WordSmith, a Text Analysis Utility.
+< 
+< WS command ('m' for menu, 'q' to exit): p
+<   Enter file name : /home/courses/cop4530p/LIB/proj3/small.txt
+<   ** reading progress : numwords == 65536
+Files test3.out.OK and test3.out.crawford are identical
+
+I'm not sure I understand because my progress bar reads perfectly even on the
+big.txt so I am wondering, it looks to me like the entire screen got skipped.                          
+
+crawford@linprog7.cs.fsu.edu:~/cop4530/proj3>ws.x
+Welcome to WordSmith, a Text Analysis Utility.
+
+     WS Command                              key
+     ----------                              ---
+     read a file  .........................  'r'
+     Read a file with progress reports  ...  'R'
+     show summary  ........................  's'
+     write report  ........................  'w'
+     show last report file to screen ......  'f'
+     clear current data  ..................  'c'
+     exit BATCH mode  .....................  'x'
+     display menu  ........................  'm'
+     quit program  ........................  'q'
+
+WS command ('m' for menu, 'q' to quit): R small.txt
+  Enter file name :   ** reading progress : numwords == 65536
+
+     Number of words read:    107871
+     Current vocabulary size: 8759
+
+WS command ('m' for menu, 'q' to quit): 
+
+Mine is totally identical there must be something I am missing that is very
+simple because I can't figure out why it would skip the menu because I don't
+believe that is under my control. 
+
+complete test3 results
+
+---------------------
+screen:
+-------
+
+-----
+It's not showing any errors to a specific line of difference since the outfiles
+are identical but it is showing blank in the screen. 
+Decided to use big.txt.com to check it I'm skipping a menu because maybe that is
+the biggest test harder than test 3, it shows the whole menu and all the progress
+the screen between it and ws_i.x are identical in the way they handle the file
+and all the values are identical.
+
+crawford@linprog7.cs.fsu.edu:~/cop4530/proj3>ws.x big.txt.com
+Welcome to WordSmith, a Text Analysis Utility.
+
+WS command ('m' for menu, 'q' to quit): R
+  Enter file name : big.txt
+  ** reading progress : numwords == 65536
+  ** reading progress : numwords == 131072
+  ** reading progress : numwords == 196608
+  ** reading progress : numwords == 262144
+  ** reading progress : numwords == 327680
+  ** reading progress : numwords == 393216
+  ** reading progress : numwords == 458752
+  ** reading progress : numwords == 524288
+  ** reading progress : numwords == 589824
+  ** reading progress : numwords == 655360
+  ** reading progress : numwords == 720896
+  ** reading progress : numwords == 786432
+  ** reading progress : numwords == 851968
+  ** reading progress : numwords == 917504
+  ** reading progress : numwords == 983040
+  ** reading progress : numwords == 1048576
+
+     Number of words read:    1094902
+     Current vocabulary size: 33684
+
+WS command ('m' for menu, 'q' to quit): s
+
+     Current files:           big.txt
+     Current word count:      1094902
+     Current vocabulary size: 33684
+
+WS command ('m' for menu, 'q' to quit): w
+  Enter file name: big.txt.out
+
+     Number of words:         1094902
+     Vocabulary size:         33684
+     Analysis written to file big.txt.out
+
+WS command ('m' for menu, 'q' to quit): x
+  switching to interactive mode
+
+     WS Command                              key
+     ----------                              ---
+     read a file  .........................  'r'
+     Read a file with progress reports  ...  'R'
+     show summary  ........................  's'
+     write report  ........................  'w'
+     show last report file to screen ......  'f'
+     clear current data  ..................  'c'
+     exit BATCH mode  .....................  'x'
+     display menu  ........................  'm'
+     quit program  ........................  'q'
+
+WS command ('m' for menu, 'q' to quit): 
+
+small.txt.com is the test that is basically being checked for in test 3 and I am
+able to run that from the terminal with identical output to ws_i.x so I am going
+to leave this for now and tend to my other studies.
+
+2/18/2019 8:43AM: So I have a theory that the error is caused when the file name
+is pushed back and in test the file name is very long because it has the whole
+directory path and i am not creating that because mine is just the file
+name. I'm just going to wait and see what happends if it gets addressed later
+this week.
+
+2/20/18 1:35PM: So I am back from one exam and I am seeing on the discussion
+board I might be on to something here so possibly my patience has paid off I am
+going to try another submittal and see what happens.

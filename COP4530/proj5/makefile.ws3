@@ -1,0 +1,36 @@
+# makefile.ws2
+
+# Jon Crawford
+
+# 3/2/2018
+
+# makefile for wordsmith3 proj4
+
+LIB = /home/courses/cop4530p/LIB
+CC = g++ -std=c++11 -Wall -Wextra -I. -I$(LIB)/cpp -I$(LIB)/tcpp
+
+all: ws3.x fmap_bst.x mmap_bst.x
+
+ws3.x: main_ws3.o wordsmith3.o xstring.o
+	$(CC) -o ws3.x main_ws3.o wordsmith3.o xstring.o
+
+fmap_bst.x: fmap_bst.o
+	$(CC) -o fmap_bst.x fmap_bst.o
+
+mmap_bst.x: mmap_bst.o
+	$(CC) -o mmap_bst.x mmap_bst.o
+
+fmap_bst.o: fmap_bst.cpp mapiter_threaded.h map_bst_threaded.h 
+	$(CC) -c fmap_bst.cpp
+
+mmap_bst.o: mmap_bst.cpp mapiter_threaded.h map_bst_threaded.h
+	$(CC) -c mmap_bst.cpp
+
+wordsmith3.o: wordsmith3.h wordsmith3.cpp cleanup.cpp
+	$(CC) -c wordsmith3.cpp
+
+main_ws3.o: wordsmith3.h main_ws3.cpp
+	$(CC) -c main_ws3.cpp
+
+xstring.o: $(LIB)/cpp/xstring.h $(LIB)/cpp/xstring.cpp
+	$(CC) -c $(LIB)/cpp/xstring.cpp

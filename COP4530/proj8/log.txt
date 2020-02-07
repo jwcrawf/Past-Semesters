@@ -1,0 +1,371 @@
+log.txt
+
+Jon Crawford
+
+4/16/2018
+
+Log file for Kevin Bacon proj8
+
+4/16/2018 8:44AM: Just copied over the files and reading the doc, what in the
+world is this hahah?
+
+3:24PM: At this point I have read everything a few times now and watched all the
+videos. I created moviematch.h and made the class definition. Also made
+skeletons for the functions and implemented the two that were given on the
+assignment doc (dump and shuffle). Still unsure about all the files to include
+but I guess I will have to add any I missed as I go.
+
+5:51PM: Added Shuffle to graph.h and updated it's definition.
+
+7:08PM: Decided to have another run at MovieMatch to try and find all behaviors
+expected or otherwise. Getting tired will probably stop soon.
+
+Welcome to MovieMatch ( Monroe, Marilyn )
+Enter actor name ('0' to quit, '$' to shuffle): Pitt, Brad
+ The KB Number of 'Pitt, Brad' is: 3
+  Do you want proof? y
+   A connecting path is:
+
+ Pitt, Brad
+   | Being John Malkovich (1999)
+ Hairston, Jester
+   | Alamo, The (1960)
+ Graham, Fred (I)
+   | Asphalt Jungle, The (1950)
+ Monroe, Marilyn
+
+4/16/2018 8:52AM: Working on a couple implementations this morning I decided to
+work on the MovieDistance because it has a well formed hint in the assignment
+doc. I have the general structure but now I am trying to determine if an actor
+is a movie and I have come up with the fact that movies have digits from the
+year and actors even if they're a second or third use roman numberals so I think
+this is the only way to tell I am just about to try some ways to implement it. 
+
+12:43PM: Really got a lot in here feeling good about getting started early, this
+project is not looking easy at all I really feel for the people who are leaving
+this last minute that is gonna be some pain. I went back to the wordsmith
+projects to get my load idea under control and I feel like that is almost
+wrapped up its a big function and there is a lot of stuff going on there so I am
+happy to get it going. I can load right now its just very slow.
+
+2:45PM: Yeah I totally forgot that I could rehash the buckets and speed all this
+up so I am getting way better with Load and its looking great.
+
+4:11PM: Still on this making all kinds of hay on these functions today, I'm in
+the mood I guess because I totally figured out how to just use the second to
+last character is a digit or not for movie and employ some of the idea from
+cleanup.cpp, I am really liking how this project is like a tour de force of all
+the stuff we learned this semester.
+
+5:22PM: Okay looks like I messed that one up a bit:
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle): Monroe, Marilyn
+ name 'Monroe, Marilyn' is a movie, not an actor
+
+haha at least I'm doing things, albeit wrong things.
+Actually I fixed that it works! and my method with the real quick check of just
+the second to last character i think is really easy on resources so thats cool.
+
+7:15PM: Trying to figure out hint, it seems to do 4 closest names regardless of
+how hard I try to break it. 
+
+Enter actor name ('0' to quit, '$' to shuffle): qop, rr
+ Name 'qop, rr' not in DB 'movies.txt'
+ Here are some similar name possibilities:
+Qissi, Abdel
+Qissi, Michel
+Qrunnut, Stephen
+Qu, Xuedong
+
+8:19PM: Set up some pseudocode in hint because it was really lame that I had all
+the functions and it was blank. Super tired now though I just have hint and
+anything else it breaks along with it to do yet but I am calling it a day.
+
+4/17/2018 3:21PM: Been working on this all day and really I am getting somewhere
+now I am able to load everything up and get some Bacon Numbers, completely
+clueless on hint still but I have eveything filled in except for that. 
+Trying to get some load times and I have really chopped down my load function to
+save time and now I am working on my sort in Init.
+
+Selection sort:
+crawford@linprog4.cs.fsu.edu:~/cop4530/proj8>kb.x movies_abbreviated.txt 'Bacon,
+Kevin'
+
+ Loading database movies_abbreviated.txt (first read) ...(second read) ... done.
+ 190 movies and 10190 actors read from movies_abbreviated.txt
+ Load time: 0.14 sec
+ Init time: 0.68 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+
+Heap sort so much better it loads the whole movies.txt in what it takes the
+selection sort to load the abbreviated version just about:
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj8>kb.x movies.txt 'Bacon, Kevin'
+
+ Loading database movies.txt (first read) ...(second read) ... done.
+ 4188 movies and 115241 actors read from movies.txt
+ Load time: 1.58 sec
+ Init time: 0.82 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle):
+
+Closer to area51 also!
+
+crawford@linprog4.cs.fsu.edu:~/cop4530/proj8>kb.x movies.txt 'Bacon, Kevin'
+
+ Loading database movies.txt (first read) ...(second read) ... done.
+ 4188 movies and 115241 actors read from movies.txt
+ Load time: 1.43 sec
+ Init time: 0.75 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle): 
+
+I beat you area51!
+I went with only 10 buckets and a rehash to get this time, super cool.
+
+4/18/2018: 8:43AM: Today is Hint day, all day hint day we'll see what I can do
+here I know what I want to do is make a short string and check the first x or so
+letters I haven't figured out the optimal length yet but that is the plan, then
+check the upper and lower bound and print through that. seems easy enough, NOPE!
+
+11:51AM: Tons of stuff is going on here and I can't imagine every student is
+going to figure this out. 
+
+4:31PM: Okay I am very deep into this function now and literally printing all
+kinds of things and sizing them up to area51, really racking my brain with the
+how to do this I thought I was getting closer and then I tried a different name
+and I can't get it, the parameters are moving around on me here.
+
+Hint issue, I figured out some stuff on hint:
+I first tried adding one z and then using different bound numbers to set my
+first substring for comparison but then I would always be either too much or
+little, and then I started taking some off the top and bottom of the new hint
+bounds and I still could not get it right, it appears to be a combination of
+all plus another z and now I am looking for any special cases. 
+
+Weird anomaly unknown symbol is at the bottom for lacher and at the beginning
+for mine, otherwise I am finally able to match area51 hint output. 
+
+Mine:
+Enter actor name ('0' to quit, '$' to shuffle): d
+ Name 'd' not in DB 'movies_abbreviated.txt'
+ Here are some similar name possibilities:
+D�az, Marlene
+D�az, Yulian
+D'Amario, Tony
+D'Ambrose, Camille
+
+Lacher:
+Dymally, Amentha
+Dysart, Richard A.
+Dzundza, George
+D�az Aroca, Miriam
+D�az, Jennifer
+Enter actor name ('0' to quit, '$' to shuffle):
+
+
+Found an edge case to check on:
+Enter actor name ('0' to quit, '$' to shuffle): aaa
+ Name 'aaa' not in DB 'movies_abbreviated.txt'
+ Here are some similar name possibilities:
+ATL (2006)
+AVP: Alien vs. Predator (2004)
+Aalda, Mariann
+Aames, Angela
+
+Obviously this means my jerry-rigged -2 to lower and + 2 to upper wont work in
+every scenario. Back to work on that. 
+Fixed that pretty easy, don't increment at the bottom or top. OBVIOUSLY.
+
+The Kevin Bacon number using movie_abbreviated is not the actual number because
+it has way less info so there are less vertices and less edges to find paths.
+
+7:18PM: This was really aggravating me with the difference and I was unable to 
+figure out the anomaly with the symbols and its because I was using LessThan
+predicate from the library and I needed to make my own for less than and greater
+than at the same time. I actually had to go back to cstringsort proj1 from 3330
+to figure out what I wanted to do and then I also found it on the C++ reference
+library from the course page listed below to make sure it was doable. 
+http://www.cplusplus.com/reference/list/list/sort/
+
+Now I am able to get the same output as area51, I wasted a good amount of time
+thinking for sure my logic was off in the way I implemented hint and this really
+was difficult to figure out with so little to go on. But it was a combination of
+things related to how I sorted with the predicate, once I had the sort correctly
+I was able to quickly adjust my hint implementation to make use of the change.
+
+First submittal have a small printing error in showstar and also getting a think
+where it says my loading line is wrong but it looks identical, also the times
+will be different obviously so I can see how that line shows a diff.
+
+Results fkb.x movies_abbreviated.txt 'Bacon, Kevin' < fkb.com2 (diff)
+-----------------------------------
+2c2
+<  Loading database movies_test.1 (first read) ...(second read) ... done. 
+---
+>  Loading database movies_test.1 (first read) ...(second read) ... done.
+30,34c30,34
+<  cccc
+<    | Movie K
+<    | Movie L
+<    | Movie M
+<    | Movie N
+---
+> cccc
+>     | Movie K
+>     | Movie L
+>     | Movie M
+>     | Movie N
+36c36,37
+
+Had a go at fixing the spacing here. Plan to tackle some other diffs tomorrow.
+
+4/19/2018: 3:21PM Have been working on the diffs from my first submittal today.
+The main problem for me is that my little check for if the second to last
+character is a digit does not work on the robograder for things like Movie D.
+I decided to make a list of movies and then check for includes on the list. My
+version of checking the digit is no doubt faster but this meets the robocheck so
+its a compromise in my opinion.
+ 
+Also I noticed that the showstar is sorted so I had to do a quick sort on that to
+get it to print alphabetically, I used selection sort on that just cause its not
+that much data. After making a small list of the output about to be shown.
+
+Experimenting with my movie list add on and trying to see performance difference
+I cannot find much difference between containers.
+
+Vector:
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj8>kb.x movies.txt 'Bacon, Kevin'
+
+ Loading database movies.txt (first read) ...(second read) ... done. 
+ 4188 movies and 115241 actors read from movies.txt
+ Load time: 1.59 sec
+ Init time: 1.00 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle): 0
+Thank you for playing Kevin Bacon
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj8>c4530 kb
+g++ -std=c++11 -Wall -Wextra -o./kb.x -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -I/home/courses/cop4530p/LIB/graph kb.cpp
+In file included from kb.cpp:7:0:
+./moviematch.h: In member function ‘long int MovieMatch::MovieDistance(const
+char*)’:
+./moviematch.h:173:17: warning: unused variable ‘cmp’ [-Wunused-variable]
+   LessThanLower cmp;
+
+Unsorted List:                 
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj8>kb.x movies.txt 'Bacon, Kevin'
+
+ Loading database movies.txt (first read) ...(second read) ... done. 
+ 4188 movies and 115241 actors read from movies.txt
+ Load time: 1.58 sec
+ Init time: 0.98 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle): 0
+Thank you for playing Kevin Bacon
+crawford@linprog5.cs.fsu.edu:~/cop4530/proj8>c4530 kb
+g++ -std=c++11 -Wall -Wextra -o./kb.x -I. -I/home/courses/cop4530p/LIB/cpp
+-I/home/courses/cop4530p/LIB/tcpp -I/home/courses/cop4530p/LIB/graph kb.cpp
+
+heap sorted Vector and binary search:
+Thank you for playing Kevin Bacon
+crawford@linprog3.cs.fsu.edu:~/cop4530/proj8>kb.x movies.txt 'Bacon, Kevin'
+
+ Loading database movies.txt (first read) ...(second read) ... done. 
+ 4188 movies and 115241 actors read from movies.txt
+ Load time: 1.38 sec
+ Init time: 0.90 sec
+
+Welcome to MovieMatch ( Bacon, Kevin )
+Enter actor name ('0' to quit, '$' to shuffle):
+
+
+I decided to go with the this look at that! 1.38 and down on the movie check
+from init. Sticking with this setup.
+
+
+4/21/2018 9:55AM: Last night and this morning I have been experimenting with the
+Levenshtein distance formula which is the edit difference between
+strings. Trying to make an intuitive hint for typo suggestion and it's really
+fun to mess around with. Hard to nail it down but I have gotten close.
+
+https://en.wikipedia.org/wiki/Levenshtein_distance
+
+Enter actor name ('0' to quit, '$' to shuffle): Monroe, Mary
+ Name 'Monroe, Mary' not in DB 'movies.txt'
+ Here are some similar name possibilities:
+Monero, Mark
+Monjou, Marc
+Monroe, Marilyn
+Morrow, Mari
+Morse, Mark
+Morter, Mary
+Enter actor name ('0' to quit, '$' to shuffle):
+
+These names are with an edit distance of 3 apart! I can't use it for the robo
+check though because it will show all the names since they are like zzz and xxx
+so they are all too similar but with the complexity of the real names it is
+something neat to work on. For example if I reduce the threshold to two and use
+the robo values I can get something like this:
+
+Enter actor name ('0' to quit, '$' to shuffle): aab
+ Name 'aab' not in DB 'movie_test.1'
+ Here are some similar name possibilities:
+aaa
+aaaa
+bbb
+Enter actor name ('0' to quit, '$' to shuffle): axab
+ Name 'axab' not in DB 'movie_test.1'
+ Here are some similar name possibilities:
+aaa
+aaaa
+Enter actor name ('0' to quit, '$' to shuffle): 
+
+On the full list with edit distance 2 it looks like this:
+
+Enter actor name ('0' to quit, '$' to shuffle): Pitt, Br
+ Name 'Pitt, Br' not in DB 'movies.txt'
+ Here are some similar name possibilities:
+Pitt, Brad
+Enter actor name ('0' to quit, '$' to shuffle):
+
+If I put the distance back up to 3 and include lowercase typos I can get an
+output like this:
+
+Enter actor name ('0' to quit, '$' to shuffle): Pitt, bra
+ Name 'Pitt, bra' not in DB 'movies.txt'
+ Here are some similar name possibilities:
+Pitt, Brad
+Pitt, Mark
+Pitt, Mary
+Pitt, Myla
+Pitts, Mia
+Witt, Brian
+Enter actor name ('0' to quit, '$' to shuffle):
+
+I think this is pretty cool because it possible the person made a typo in the
+first character so the lower upper bound hint wouldn't help them in that case!
+
+This person below typing Ben Walton might have meant Ben Welden or Ben Elton 
+their memory was probably fuzzy!
+
+Enter actor name ('0' to quit, '$' to shuffle): Walton, Ben
+ Name 'Walton, Ben' not in DB 'movies.txt'
+ Here are some similar name possibilities:
+Bilson, Ben
+Dalton, Lee
+Elton, Ben
+Keaton, Ben
+Nealon, Ben
+Peyton, Ben
+Welden, Ben
+Enter actor name ('0' to quit, '$' to shuffle):
+
+Alright I have a research paper due Sunday midnight so I am going to get back to
+work on that but i will probably come back to this in the summer and try to
+perfect it just as an exercise.

@@ -1,0 +1,40 @@
+# makefile.ht
+
+# Jon Crawford
+
+# 3/25/2018
+
+# makefile for HashTable proj6
+
+#LIB = /home/courses/cop4530p/LIB
+#CC = g++ -std=c++11 -Wall -Wextra -I. -I$(LIB)/cpp -I$(LIB)/tcpp
+
+#HOME = /home/jw/GoogleDrive/School/PastSemesters/COP4530
+HOME = /mnt/c/Users/jonat/'Google Drive'/School/PastSemesters/COP4530
+CC = g++ -std=c++11 -Wall -Wextra -I. -I$(HOME)/cpp -I$(HOME)/tcpp
+
+fhtbl.x: fhtbl.cpp hashtbl.h
+	$(CC) -o fhtbl.x fhtbl.cpp
+
+fhtblKISS.x: fhtbl.cpp hashtbl.h
+	$(CC) -o fhtblKISS.x fhtbl.cpp
+
+fhtblModP.x: fhtbl.cpp hashtbl.h
+	$(CC) -o fhtblModP.x fhtbl.cpp
+
+fhtblMM.x: fhtbl.cpp hashtbl.h
+	$(CC) -o fhtblMM.x fhtbl.cpp
+
+fhtblSimple.x: fhtbl.cpp hashtbl.h
+	$(CC) -o fhtblSimple.x fhtbl.cpp
+
+hashcalc.x: hashcalc.cpp 
+	$(CC) -o hashcalc.x hashcalc.cpp
+
+rantable.x: rantable.cpp
+	$(CC) -o rantable.x rantable.cpp
+
+hasheval.x: hasheval.cpp hashtbl.h
+	    $(CC) -o hasheval.x hasheval.cpp	     
+
+

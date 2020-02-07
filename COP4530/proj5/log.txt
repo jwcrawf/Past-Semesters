@@ -1,0 +1,83 @@
+log.txt
+
+Jon Crawford
+
+3/5/2018
+
+Log file for proj5 BST iterators
+
+3/5/2018 8:40AM: Read the assignment doc last night and this morning and just
+copied over the files to get a look at the project. Plan to do a full recon this
+morning and get started on wordsmith3 today. From the looks of the files I can
+see there is a significant amount of implementation work to be done so I am glad
+I decided to start early on this one.
+
+3/6/2018 10:40AM: Had some trouble with my new version of Height returning
+one different than the area51 fmap. I was able to solve this by checking for if
+the base tree node has any children before doing the recursion. If you think
+about this is like the base case in a proof with induction so theres symmetry.
+
+3/6/2018 2:03PM: Stole my == implementation from list.h. It is using a for loop
+and sequential but I can't see another logical way to implement. Gonna see how
+that shakes out later for now.
+
+3/9/2018  3:31PM: Can't figure out how I can put, get and insert but my includes
+function is still searching for certain values while others it can return key
+not found. Trying to understand what makes these keys special that are not able
+to break out.
+ 
+command ('M' for menu, 'Q' to quit): f t5.in
+  ** table data read and stored
+command ('M' for menu, 'Q' to quit): i ted
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): i ten
+^C
+
+3/10/2018 9:07AM: So I think I have figured out a clue as to why the Includes
+keeps searching for some values its because they were similar values and it was
+unable to further seperate their equality. See the implementation below. This
+also holding me back from even trying mmap_bst because it just blanks out so
+this is gonna have to get figured out its a roadblock for now.
+
+command ('M' for menu, 'Q' to quit): f t5.in
+  ** table data read and stored
+command ('M' for menu, 'Q' to quit): i ted
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): i ten
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): i tex
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): q
+
+3/16/2018 1:31PM: Totally got it I had to adopt some of the logic from the upper
+bound function but it finally breaks out. and It is still using the algorithm so
+it will meet the engineering specs for time complexity.
+
+
+command ('M' for menu, 'Q' to quit): f t5.in
+  ** table data read and stored
+command ('M' for menu, 'Q' to quit): i ted
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): i ten
+ key not found
+command ('M' for menu, 'Q' to quit): i tex
+ key not found
+command ('M' for menu, 'Q' to quit): i ted
+ iterator at entry <ted,3>
+command ('M' for menu, 'Q' to quit): i joi
+ iterator at entry <joi,3>
+command ('M' for menu, 'Q' to quit): i job
+ key not found
+command ('M' for menu, 'Q' to quit): q
+
+Also was able to test mmap finally with something happening at is working.
+
+ Depth distrubution shown with compression divisor 7
+   x2.Size()              ==  3959
+   x2.Height()            ==  26
+   optimal ht (size)      ==  11
+
+Test Complete
+crawford@linprog8.cs.fsu.edu:~/cop4530/proj5>
+
+Might try a first submit to see where I'm erroring.
