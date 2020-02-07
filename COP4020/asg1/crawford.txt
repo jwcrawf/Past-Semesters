@@ -1,0 +1,860 @@
+=============================================
+COP 4020
+Programming Assignment 1: cscan
+Assessment Report
+Assessor: Derek Yohn
+=============================================
+
+Test 0					  60
+Test 1					  21
+Test 2					   2
+Test 3					   2
+Test 4					   2
+Test 5					   2
+Test 6					   2
+Test 7					   0
+Test 8					   2
+                                         ----
+total:                         [0..100]:  93
+
+=============================================
+
+
+submission history
+------------------
+on time
+
+
+comments
+--------
+The counts were off in test1 (recurrent issue), and you had a lot of differences
+that appeared to be your code echoing what it scans maybe? Not sure (and that
+would have been acceptable anyway this time), but the big thing I noticed was
+that your code has trouble identifying illegal chars/tokens/strings. This
+doesn't become obvious until the later tests (test 7, for example). Basically,
+you missed some cases. My suggestion is to always think first about what all the
+possible cases are for a particular scenario (code state). Once identified,
+enumerate these and then make anything else an error.
+
+
+Test Details
+------------
+test0 60pts - base case (sample.c)
+test1 26pts - basic test to see if all operators and tokens are recognized
+test2 2pts - tests for special cases of strings and character literals
+test3 2pts - a file with an unclosed comment
+test4 2pts - empty input case
+test5 2pts - file with invalid tokens
+test6 2pts - tests for comments and strings containing comments
+test7 2pts - tests for illegal character literals and strings
+test8 2pts - tests for "\n" in string token
+
+
+**************************************************
+  Test 0
+**************************************************
+
+Files ./rubric/u0 and ./rubric/s0 are identical
+
+
+
+
+**************************************************
+  Test 1
+**************************************************
+
+0a1,16
+> test1
+> -
+> basic
+> test
+> to
+> see
+> if
+> all
+> operators
+> and
+> *
+> tokens
+> are
+> recognized
+> *
+> /
+56c72,73
+< <=
+---
+> <
+> =
+65c82,83
+< <=
+---
+> <
+> =
+71c89,90
+< <=
+---
+> <
+> =
+101c120,121
+< >=
+---
+> >
+> =
+107c127,128
+< >=
+---
+> >
+> =
+265c286
+<                 ident     95
+---
+>                 ident    107
+266a288
+>                     =     31
+268c290
+<                     =     26
+---
+>                     <      6
+270a293
+>                     >      4
+275,276c298
+<                    <=      3
+<                     <      3
+---
+>                     *      3
+281,282c303,304
+<                    >=      2
+<                     >      2
+---
+>                     -      2
+>                     /      2
+301d322
+<                     *      1
+304d324
+<                     -      1
+306d325
+<                     /      1
+
+
+
+
+**************************************************
+  Test 2
+**************************************************
+
+0a1,11
+> tests
+> for
+> special
+> cases
+> of
+> strings
+> and
+> character
+> literals
+> *
+> /
+46c57
+<                 ident     13
+---
+>                 ident     22
+52a64
+>                     *      2
+54d65
+<                     *      1
+55a67
+>                     /      1
+
+
+
+
+**************************************************
+  Test 3
+**************************************************
+
+1c1,11
+< unclosed comment
+---
+> test
+> 3
+> -
+> a
+> file
+> with
+> an
+> unclosed
+> comment
+> *
+> /
+8c18,19
+<                 ident      1
+---
+>                 ident      8
+>                number      1
+10a22,24
+>                     *      1
+>                     -      1
+>                     /      1
+
+
+
+
+**************************************************
+  Test 4
+**************************************************
+
+Files ./rubric/u4 and ./rubric/s4 are identical
+
+
+
+
+**************************************************
+  Test 5
+**************************************************
+
+1,3c1,6
+< illegal character: # on line 6
+< illegal character: @ on line 6
+< illegal character: $ on line 8
+---
+> file
+> with
+> invalid
+> tokens
+> *
+> /
+12c15
+<                 ident      1
+---
+>                 ident      5
+14a18,19
+>                     *      1
+>                     /      1
+
+
+
+
+**************************************************
+  Test 6
+**************************************************
+
+0a1,9
+> tests
+> for
+> comments
+> and
+> strings
+> containing
+> comments
+> *
+> /
+6a16,18
+> /
+> *
+> /
+10a23,25
+>                 ident      7
+>                     /      4
+>                     *      3
+12d26
+<                     *      1
+16d29
+<                     /      1
+
+
+
+
+**************************************************
+  Test 7
+**************************************************
+
+1,6c1,10
+< character constant 'aa' too long on line 5
+< character constant '\0123' too long on line 7
+< illegal octal constant '\'\'' on line 11
+< missing ' for 'a      on line 13
+< missing " for "abc on line 15
+< missing " for "abc\" on line 17
+---
+> tests
+> for
+> illegal
+> character
+> literals
+> and
+> strings
+> *
+> /
+> 'aa'
+7a12,13
+> '\'
+> "abc\"
+11c17,21
+<                  char      1
+---
+>                 ident      7
+>                  char      3
+>                string      1
+>                     *      1
+>                     /      1
+
+
+
+
+**************************************************
+  Test 8
+**************************************************
+
+Files ./rubric/u8 and ./rubric/s8 are identical
+
+
+
+
+************************************************************
+************************************************************
+  Dr. Uh's verified output follows
+************************************************************
+************************************************************
+
+
+
+
+
+**************************************************
+  Base Case 
+**************************************************
+
+main
+(
+)
+{
+printf
+(
+"This is a test.\n"
+)
+;
+}
+
+        token          count
+---------------------  -----
+                ident      2
+                    (      2
+                    )      2
+               string      1
+                    ;      1
+                    {      1
+                    }      1
+
+
+
+
+**************************************************
+  Test 1
+**************************************************
+
+main
+(
+)
+int
+x
+,
+y
+;
+{
+a
+=
+x
++
+y
+;
+a
+=
+x
+-
+y
+;
+a
+=
+xy
+*
+y
+;
+a
+=
+_x23
+/
+y_23
+;
+x
+++
+;
+y
+--
+;
+++
+x
+;
+--
+y
+;
+--
+_y
+;
+for
+(
+i
+=
+1
+;
+i
+<=
+10
+;
+i
+++
+)
+i
+=
+i
+<=
+10
+;
+i
+=
+i
+<=
+10
+;
+y
+=
+y
+<
+10
+;
+y
+=
+y
+<
+10
+;
+y
+=
+y
+>
+10
+;
+y
+=
+y
+>
+10
+;
+y
+=
+y
+>=
+10
+;
+y
+=
+y
+>=
+10
+;
+y
+=
+y
+==
+10
+;
+z
+=
+z
+!=
+_x243
+;
+if
+(
+y
+==
+10
+)
+if
+(
+z
+!=
+99
+)
+a
+[
+i
+]
+=
+a
+[
+i
+]
+&
+z
+;
+a
+[
+i
+]
+=
+a
+[
+i
+]
+&&
+z
+;
+if
+(
+x
+||
+y
+&&
+z
+)
+{
+x
++=
+23
+;
+y234_4
+*=
+23
+;
+y2
+/=
+z
+;
+a
+|=
+21
+;
+a
+^=
+34
+;
+a
+&=
+z
+;
+a
+-=
+23
+;
+a
+=
+a
+%
+10
+;
+a
+%=
+22
+;
+a
+>>=
+3
+;
+a
+<<=
+43
+;
+a
+=
+a
+<<
+2
+;
+a
+=
+a
+>>
+1
+;
+a
+=
+'b'
+a
+=
+"this is a test"
+a
+=
+a
+<
+y
+?
+2
+:
+3
+;
+a
+.
+2
+a
+=
+~
+3
+;
+a
+=
+p
+->
+y
+;
+a
+=
+p
+->
+z
+;
+}
+
+        token          count
+---------------------  -----
+                ident     95
+                    ;     41
+               number     28
+                    =     26
+                    (      5
+                    )      5
+                    [      4
+                    ]      4
+                   ++      3
+                   --      3
+                   <=      3
+                    <      3
+                   !=      2
+                   &&      2
+                   ->      2
+                   ==      2
+                   >=      2
+                    >      2
+                    {      2
+               string      1
+                 char      1
+                  <<=      1
+                  >>=      1
+                   %=      1
+                   &=      1
+                   *=      1
+                   +=      1
+                   -=      1
+                   /=      1
+                   <<      1
+                   >>      1
+                   ^=      1
+                   |=      1
+                   ||      1
+                    %      1
+                    &      1
+                    *      1
+                    +      1
+                    ,      1
+                    -      1
+                    .      1
+                    /      1
+                    :      1
+                    ?      1
+                    }      1
+                    ~      1
+
+
+
+
+**************************************************
+  Test 2
+**************************************************
+
+main
+(
+)
+{
+int
+x
+;
+char
+a
+,
+*
+b
+;
+x
+++
+;
+a
+=
+'"'
+;
+a
+=
+'\027'
+;
+a
+=
+'\\'
+;
+printf
+(
+"abcdef\n"
+)
+;
+b
+=
+"   \" ' \" "
+;
+b
+=
+"efghijklmnop"
+;
+}
+
+        token          count
+---------------------  -----
+                ident     13
+                    ;      9
+                    =      5
+               string      3
+                 char      3
+                    (      2
+                    )      2
+                   ++      1
+                    *      1
+                    ,      1
+                    {      1
+                    }      1
+
+
+
+
+**************************************************
+  Test 3
+**************************************************
+
+unclosed comment
+main
+(
+)
+
+        token          count
+---------------------  -----
+                ident      1
+                    (      1
+                    )      1
+
+
+
+
+**************************************************
+  Test 4
+**************************************************
+
+
+        token          count
+---------------------  -----
+
+
+
+
+**************************************************
+  Test 5
+**************************************************
+
+illegal character: # on line 6
+illegal character: @ on line 6
+illegal character: $ on line 8
+main
+(
+)
+{
+}
+
+        token          count
+---------------------  -----
+                ident      1
+                    (      1
+                    )      1
+                    {      1
+                    }      1
+
+
+
+
+**************************************************
+  Test 6
+**************************************************
+
+,
+;
++
+-
+*
+/
+" Strings can contain /* comments */ as well. "
+
+        token          count
+---------------------  -----
+               string      1
+                    *      1
+                    +      1
+                    ,      1
+                    -      1
+                    /      1
+                    ;      1
+
+
+
+
+**************************************************
+  Test 7
+**************************************************
+
+character constant 'aa' too long on line 5
+character constant '\0123' too long on line 7
+illegal octal constant '\'\'' on line 11
+missing ' for 'a      on line 13
+missing " for "abc on line 15
+missing " for "abc\" on line 17
+'\''
+
+        token          count
+---------------------  -----
+                 char      1
+
+
+
+
+**************************************************
+  Test 8
+**************************************************
+
+main
+(
+)
+{
+int
+x
+,
+y
+;
+printf
+(
+"hello world!\n"
+)
+;
+}
+
+        token          count
+---------------------  -----
+                ident      5
+                    (      2
+                    )      2
+                    ;      2
+               string      1
+                    ,      1
+                    {      1
+                    }      1
