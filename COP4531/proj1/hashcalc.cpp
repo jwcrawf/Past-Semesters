@@ -1,11 +1,8 @@
 /*
     hashcalc.cpp
-    08/27/11
-    Chris Lacher
+   
+		hash function calculator
 
-    hash function calculator
-
-    Copyright 2011, R. C. Lacher
 */
 
 #include <cstdlib>
